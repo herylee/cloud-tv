@@ -1,0 +1,36 @@
+<div class="navbar">
+    <div class="shell">
+        <div class="menu base">
+            <div><a href="/">首页</a></div>
+            <div><a href="/">全部</a></div>
+            <div><a href="/">分类</a></div>
+            <div><a href="/">更多</a></div>
+
+            <!-- 判断user -->
+            #if(${myself})
+                <div class="fr dropmenu" >
+                    <span class="fs4 pt2">${myself.nickname}</span>
+                    <ul>
+                        <li><a href="/user/${myself.id}">我的主页</a></li>
+                        <li><a href="/auth/logout">退出</a></li>
+                    </ul>
+                </div>
+            #else
+                <div class="fr" ><a id="loginButton" href="#login-box">登录</a></div>
+                <!-- 登录box -->
+                <div id="login-box" class="hide">
+                    <h5 class="tc">Cloud.tv</h5>
+                    <form id="loginForm">
+                        <ul class="form ratio100">
+                            <li><span>E-mail</span><div><input name="email" type="text"></div></li>
+                            <li><span>Password</span><div><input name="password" type="text"></div></li>
+                            <li><div class="tc"><button onclick="login()" type="button" class="btn">登录</button></div></li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="fr"><a href="/register.html">注册</a></div>
+            #end
+
+        </div>
+    </div>
+</div>

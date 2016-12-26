@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="joshua.cloudtv.dao.mapper.PublishTypeMapper">
+  <resultMap id="BaseResultMap" type="joshua.cloudtv.dao.model.PublishType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="type_url" jdbcType="VARCHAR" property="typeUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, description, type_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from publish_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from publish_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="joshua.cloudtv.dao.model.PublishType">
+    insert into publish_type (id, description, type_url
+      )
+    values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{typeUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="joshua.cloudtv.dao.model.PublishType">
+    insert into publish_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="typeUrl != null">
+        type_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="typeUrl != null">
+        #{typeUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="joshua.cloudtv.dao.model.PublishType">
+    update publish_type
+    <set>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="typeUrl != null">
+        type_url = #{typeUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="joshua.cloudtv.dao.model.PublishType">
+    update publish_type
+    set description = #{description,jdbcType=VARCHAR},
+      type_url = #{typeUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

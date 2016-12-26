@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="joshua.cloudtv.dao.mapper.UserSecurityMapper">
+  <resultMap id="BaseResultMap" type="joshua.cloudtv.dao.model.UserSecurity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="question_one" jdbcType="INTEGER" property="questionOne" />
+    <result column="question_two" jdbcType="INTEGER" property="questionTwo" />
+    <result column="question_three" jdbcType="INTEGER" property="questionThree" />
+    <result column="answer_one" jdbcType="VARCHAR" property="answerOne" />
+    <result column="answer_two" jdbcType="VARCHAR" property="answerTwo" />
+    <result column="answer_three" jdbcType="VARCHAR" property="answerThree" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, question_one, question_two, question_three, answer_one, answer_two, answer_three
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_security
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_security
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="joshua.cloudtv.dao.model.UserSecurity">
+    insert into user_security (id, question_one, question_two, 
+      question_three, answer_one, answer_two, 
+      answer_three)
+    values (#{id,jdbcType=INTEGER}, #{questionOne,jdbcType=INTEGER}, #{questionTwo,jdbcType=INTEGER}, 
+      #{questionThree,jdbcType=INTEGER}, #{answerOne,jdbcType=VARCHAR}, #{answerTwo,jdbcType=VARCHAR}, 
+      #{answerThree,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="joshua.cloudtv.dao.model.UserSecurity">
+    insert into user_security
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="questionOne != null">
+        question_one,
+      </if>
+      <if test="questionTwo != null">
+        question_two,
+      </if>
+      <if test="questionThree != null">
+        question_three,
+      </if>
+      <if test="answerOne != null">
+        answer_one,
+      </if>
+      <if test="answerTwo != null">
+        answer_two,
+      </if>
+      <if test="answerThree != null">
+        answer_three,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questionOne != null">
+        #{questionOne,jdbcType=INTEGER},
+      </if>
+      <if test="questionTwo != null">
+        #{questionTwo,jdbcType=INTEGER},
+      </if>
+      <if test="questionThree != null">
+        #{questionThree,jdbcType=INTEGER},
+      </if>
+      <if test="answerOne != null">
+        #{answerOne,jdbcType=VARCHAR},
+      </if>
+      <if test="answerTwo != null">
+        #{answerTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="answerThree != null">
+        #{answerThree,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="joshua.cloudtv.dao.model.UserSecurity">
+    update user_security
+    <set>
+      <if test="questionOne != null">
+        question_one = #{questionOne,jdbcType=INTEGER},
+      </if>
+      <if test="questionTwo != null">
+        question_two = #{questionTwo,jdbcType=INTEGER},
+      </if>
+      <if test="questionThree != null">
+        question_three = #{questionThree,jdbcType=INTEGER},
+      </if>
+      <if test="answerOne != null">
+        answer_one = #{answerOne,jdbcType=VARCHAR},
+      </if>
+      <if test="answerTwo != null">
+        answer_two = #{answerTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="answerThree != null">
+        answer_three = #{answerThree,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="joshua.cloudtv.dao.model.UserSecurity">
+    update user_security
+    set question_one = #{questionOne,jdbcType=INTEGER},
+      question_two = #{questionTwo,jdbcType=INTEGER},
+      question_three = #{questionThree,jdbcType=INTEGER},
+      answer_one = #{answerOne,jdbcType=VARCHAR},
+      answer_two = #{answerTwo,jdbcType=VARCHAR},
+      answer_three = #{answerThree,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

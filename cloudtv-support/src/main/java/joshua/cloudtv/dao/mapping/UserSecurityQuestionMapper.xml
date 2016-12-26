@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="joshua.cloudtv.dao.mapper.UserSecurityQuestionMapper">
+  <resultMap id="BaseResultMap" type="joshua.cloudtv.dao.model.UserSecurityQuestion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="question_description" jdbcType="VARCHAR" property="questionDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, question_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_security_question
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_security_question
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="joshua.cloudtv.dao.model.UserSecurityQuestion">
+    insert into user_security_question (id, question_description)
+    values (#{id,jdbcType=INTEGER}, #{questionDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="joshua.cloudtv.dao.model.UserSecurityQuestion">
+    insert into user_security_question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="questionDescription != null">
+        question_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questionDescription != null">
+        #{questionDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="joshua.cloudtv.dao.model.UserSecurityQuestion">
+    update user_security_question
+    <set>
+      <if test="questionDescription != null">
+        question_description = #{questionDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="joshua.cloudtv.dao.model.UserSecurityQuestion">
+    update user_security_question
+    set question_description = #{questionDescription,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

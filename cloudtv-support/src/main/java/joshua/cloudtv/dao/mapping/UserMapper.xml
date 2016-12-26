@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="joshua.cloudtv.dao.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="joshua.cloudtv.dao.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="BIGINT" property="salt" />
+    <result column="head_url" jdbcType="VARCHAR" property="headUrl" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="experience" jdbcType="INTEGER" property="experience" />
+    <result column="permission" jdbcType="INTEGER" property="permission" />
+    <result column="last_login_ip" jdbcType="INTEGER" property="lastLoginIp" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="self_signature" jdbcType="VARCHAR" property="selfSignature" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="born_time" jdbcType="DATE" property="bornTime" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="occupation" jdbcType="VARCHAR" property="occupation" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, email, phone_number, nickname, password, salt, head_url, level, experience, permission, 
+    last_login_ip, last_login_time, self_signature, sex, born_time, province, city, area, 
+    occupation
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="joshua.cloudtv.dao.model.User">
+    insert into user (id, email, phone_number, 
+      nickname, password, salt, 
+      head_url, level, experience, 
+      permission, last_login_ip, last_login_time, 
+      self_signature, sex, born_time, 
+      province, city, area, 
+      occupation)
+    values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=BIGINT}, 
+      #{headUrl,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{experience,jdbcType=INTEGER}, 
+      #{permission,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{selfSignature,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{bornTime,jdbcType=DATE}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{occupation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="joshua.cloudtv.dao.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="headUrl != null">
+        head_url,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="experience != null">
+        experience,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="selfSignature != null">
+        self_signature,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="bornTime != null">
+        born_time,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="occupation != null">
+        occupation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=BIGINT},
+      </if>
+      <if test="headUrl != null">
+        #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null">
+        #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="selfSignature != null">
+        #{selfSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="bornTime != null">
+        #{bornTime,jdbcType=DATE},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null">
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="joshua.cloudtv.dao.model.User">
+    update user
+    <set>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=BIGINT},
+      </if>
+      <if test="headUrl != null">
+        head_url = #{headUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null">
+        experience = #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="selfSignature != null">
+        self_signature = #{selfSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="bornTime != null">
+        born_time = #{bornTime,jdbcType=DATE},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null">
+        occupation = #{occupation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="joshua.cloudtv.dao.model.User">
+    update user
+    set email = #{email,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=BIGINT},
+      head_url = #{headUrl,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      experience = #{experience,jdbcType=INTEGER},
+      permission = #{permission,jdbcType=INTEGER},
+      last_login_ip = #{lastLoginIp,jdbcType=INTEGER},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      self_signature = #{selfSignature,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      born_time = #{bornTime,jdbcType=DATE},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      occupation = #{occupation,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

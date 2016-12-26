@@ -1,0 +1,44 @@
+<div class="footer">
+    <div class="shell">
+        <div class="box75 fc">
+            <div class="box25">
+                <dl class="baselist">
+                    <dt>友情链接</dt>
+                    <dd>Twitch</dd>
+                    <dd>斗鱼</dd>
+                    <dd>熊猫直播</dd>
+                    <dd>战旗</dd>
+                    <dd></dd>
+                </dl>
+            </div>
+            <div class="box25">
+                <dl class="baselist">
+                    <dt>联系我们</dt>
+                    <dd>Weibo</dd>
+                    <dd>知乎</dd>
+                </dl>
+            </div>
+            <div class="box25">
+                <dl class="baselist">
+                    <dt>帮助</dt>
+                    <dd>新手上路</dd>
+                    <dd>工具教程</dd>
+                </dl>
+            </div>
+            <div class="box25">
+                <dl class="baselist">
+                    <dt>相关技术</dt>
+                    <dd>Gaming Anywhere</dd>
+                    <dd>Nginx</dd>
+                    <dd>video.js</dd>
+                    <dd>Spring boot</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="bg-333 c-999">
+        <div class="shell pt5 pb5">
+            <div style="text-align: center;">Copyright ©2016 Networking Research Lab @ SYSU - All Rights Reserved</div>
+        </div>
+    </div>
+</div>

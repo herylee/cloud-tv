@@ -1,0 +1,71 @@
+<div id="userInfoMap" class="box100">
+    <dl class="box30 baselist tr pr4">
+        <dd>昵称：</dd>
+        <dd>邮箱：</dd>
+        <dd>电话：</dd>
+        <dd>个人签名：</dd>
+        <dd>等级：</dd>
+        <dd>性别：</dd>
+        <dd>出生年月：</dd>
+        <dd>省：</dd>
+        <dd>市：</dd>
+        <dd>区：</dd>
+        <dd>职业：</dd>
+    </dl>
+    #macro( isNull $str )
+        #if($str)
+            $str
+        #else
+            未填写
+        #end
+    #end
+    <dl class="box70 baselist">
+        <dd>${user.nickname}</dd>
+        <dd>${user.email}</dd>
+        <dd>#isNull(${user.phoneNumber})</dd>
+        <dd>#isNull(${user.selfSignature})</dd>
+        <dd>${user.level}</dd>
+        <dd>
+            #if(${user.sex} == 1)
+                男
+            #else
+                女
+            #end
+        </dd>
+        <dd>${user.bornTimeFormat}</dd>
+        <dd>#isNull(${user.province})</dd>
+        <dd>#isNull(${user.city})</dd>
+        <dd>#isNull(${user.area})</dd>
+        <dd>#isNull(${user.occupation})</dd>
+        <dd>
+            #if(${myself} && ${myself.id} == ${user.id} )
+                <div  id="userModifyButton" class="tc">
+                    <button type="button" class="btn fl tooltip" onclick="modifyUser()">修改
+                        <div class="tooltip-right">修改头像请点击头像</div>
+
+                    </button>
+                </div>
+            #end
+        </dd>
+    </dl>
+</div>
+
+<form id="userInfoForm" class="hide">
+    <ul class="form ratio80">
+        <li><span>昵称</span><div><input name="nickName" type="text" value="$!{user.nickname}"></div></li>
+        <li><span>电话</span><div><input name="phoneNumber" type="text" value="$!{user.phoneNumber}"></div></li>
+        <li><span>个人签名</span><div><input name="selfSignature" type="text" value="$!{user.selfSignature}"></div></li>
+        <li><span>出生年月</span><div><input name="bornTime" id="datepicker" type="text" value="$!{user.bornTime}"></div></li>
+        <li><span>省</span><div><input name="province" type="text" value="$!{user.province}"></div></li>
+        <li><span>市</span><div><input name="city" type="text" value="$!{user.city}"></div></li>
+        <li><span>区</span><div><input name="area" type="text" value="$!{user.area}"></div></li>
+        <li><span>职业</span><div><input name="occupation" type="text" value="$!{user.occupation}"></div></li>
+
+        <li>
+            <div class="btn-group">
+                <button type="button" class="btn bg-main3" onclick="submitUserInfo()"><i class="flaticon-clipboard85"></i>提交</button>
+                <button type="button" class="btn" onclick="cancelModifyUser()"><i class="flaticon-cross89"></i>取消</button>
+            </div>
+        </li>
+    </ul>
+</form>

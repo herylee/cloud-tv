@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>云游戏直播平台</title>
+<meta name="keywords" content="Keywords">
+<meta name="description" content="Description"> 
+
+<link rel="stylesheet" href="/css/diquick.css">
+<link rel="stylesheet" href="/css/joshua.css">
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css">
+<link  rel="stylesheet"href="/css/video-js.min.css">
+<link rel="stylesheet" href="/css/vsg-skin.css">
+
+</head>
+
+<body>
+
+<!-- wrapper begin -->
+<div class="wrapper">
+    <div>
+    	#parse("sub-nav.vm")
+    </div>
+   
+    <div class="main">
+    	<div class="shell mb5 bg-main3">
+    		<!-- 主播信息 -->
+    		<div>
+    			<div class="box100" style="border: 2px solid;">
+    				<div class="box10">
+    					<img src=${publisher.headUrl} onerror="this.src='/img/defaultHead.gif'" class="circle ml5 mt5 mb5" style="max-width: 80px; border: solid gainsboro;" />
+    				</div>
+    				<div class="box80 c-fff">
+    					<dl>
+    						<dd class="fs4 b mt5 pt4 pb1">${publisher.nickname}</dd>
+    						<dd class="pt1">${publisher.selfSignature}</dd>
+    					</dl>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    	
+    	<div class="shell">
+    		<div class="sidebar fr">
+				<div id="wsUri" class="hide">$!{wsUri}</div>
+
+                <!-- chatboard -->
+
+                <div>
+                	<div class="title">吐槽一下</div>
+                	<div id="chatBoard" class="scrollbar">
+                	</div>
+
+					<div class="mt5">
+                        <form onsubmit="return false;">
+                            <ul class="form ratio100">
+                                <li><input type="text" name="message" style="width: 100%"></li>
+                                <li><input class="btn bg-main3" type="button" value="发送" onclick="send(this.form.message.value);this.form.message.value=''"  style="width: 100%"></li>
+                            </ul>
+                        </form>
+					</div>
+                </div>
+
+			</div>
+			
+            <div class="container">
+            	<div class="mb5">
+            		<video id="my-player" class="video-js vjs-fluid vjs-16-9" controls width="800" height="480" preload="auto" poster=""
+                  data-setup='{ "autoplay": true }'>
+  
+                     <!--   <source src="img/oceans.mp4" type="video/mp4"></source> -->
+                    <source src="${liveRoom.publishUrl}/${liveRoom.id}" type="rtmp/mp4"></source>
+                    </video>
+            		
+            	</div>
+                
+                <!-- 房间描述 -->
+                
+                <div class="panel mt5">
+                	<div class="title bg-main3 c-fff">${liveRoom.roomName}</div>
+                	<div class="content">$!{liveRoom.roomDescription}</div>
+                </div>
+                
+            </div>
+    	</div>
+    </div>
+    
+    #parse("sub-footer.vm")
+</div>
+<!-- wrapper end -->
+
+<script src="/js/jquery.js"></script>
+<script src="/js/diquick.js"></script>
+<script src="/js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.form.js"></script>
+<script src="/js/joshua.js"></script>
+<script src="/js/video.min.js"></script>
+<script src="/js/chat.js"></script>
+
+</body>
+
+</html>

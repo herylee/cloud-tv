@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>云游戏直播平台</title>
+<meta name="keywords" content="Keywords">
+<meta name="description" content="Description">
+
+<link rel="stylesheet" href="./css/diquick.css">
+<link rel="stylesheet" href="./css/jquery-ui.min.css">
+<link rel="stylesheet" href="./css/joshua.css">
+<link rel="stylesheet" href="./js/fancybox/jquery.fancybox.css">
+
+</head>
+
+<body>
+
+<!-- wrapper begin -->
+<div class="wrapper">
+    <div class="header">
+        #parse("sub-nav.vm")
+        #include("sub-banner.vm")
+    </div>
+
+    <div class="main">
+        <div class="shell">
+            <h2 class="mb5">热门直播<small>大家正在观看的直播者</small></h2>
+            <div class="box100">
+            	<!-- 直播间列表 -->
+                #macro( showLiveRooms $liveRoomsList )
+                    #foreach($liveRoomView in $liveRoomsList )
+                        <div class="box33 box-m50 pl5 pr5">
+                            <div class="media">
+                                <span><a href="/liveRoom/$liveRoomView.roomId"><img src=${liveRoomView.posterUrl} onerror="this.src='/img/defaultPoster.jpg'"></a></span>
+                                <div>
+                                    <div class="fs3">$liveRoomView.roomName</div>
+                                    <div class="mt1 fs2"><a>$liveRoomView.publisherNickName</a><span class="fr"><i class="flaticon-eye102"></i>$liveRoomView.liveWatchCount</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    #end
+                #end
+
+                #showLiveRooms($liveRoomslist)
+
+            </div>
+            <a class="fr" href="#"><i class="flaticon-arrow607"></i>更多热门游戏</a>
+        </div>
+    </div>
+
+    #include("sub-footer.vm")
+</div>
+<!-- wrapper end -->
+
+<script src="/js/jquery.js"></script>
+<script src="/js/diquick.js"></script>
+<script src="/js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/joshua.js"></script>
+
+</body>
+
+</html>

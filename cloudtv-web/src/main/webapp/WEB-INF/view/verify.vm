@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>云游戏直播平台</title>
+<meta name="keywords" content="Keywords">
+<meta name="description" content="Description"> 
+
+<link rel="stylesheet" href="/css/diquick.css">
+<link rel="stylesheet" href="/css/jquery-ui.min.css">
+<link rel="stylesheet" href="/css/joshua.css">
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css">
+
+</head>
+
+<body>
+
+<!-- wrapper begin -->
+<div class="wrapper">
+    <div class="header">
+    	#parse("sub-nav.vm")
+    	<div class="banner">
+    		<div class="shell">
+    			<dl>
+    				<dt>Cloud.tv</dt>
+    				<dd><i class="flaticon-analogic4"></i>一个简易的云游戏直播平台</dd>
+    				<dd>alpha 0.1</dd>
+    			</dl>
+    		</div>
+    	</div>
+    </div>
+    
+    <div class="main">
+    	<div class="shell">
+    		<div class="box100">
+    			<div class="box20">&nbsp;</div>
+    			<div class="box60">
+    				<div id="registerResult-correct" class="msg correct hide"><i class="flaticon-verification16"></i>注册成功！请到登录界面登录。</div>
+                    <div id="registerResult-error" class="msg error hide"><i class="flaticon-prohibition18"></i><div id="registerResult-error-message" style="display: inline;"></div></div>
+		    		<h2 class="mb5">成为主播</h2>
+		    		<form id="applyForm">
+		    			<ul class="form ratio80">
+		    				<li><span>真实姓名</span><div><input name="realName" type="text"></div></li>	
+		    				<li><span>电话号码</span><div><input name="phoneNumber" type="text"></div></li>
+		    				<li><span>证件类型</span>
+				                <select name="certType">
+				                    <option value="0">公民身份证</option>
+				                    <option value="1">护照</option>
+				                </select>
+		    				</li>
+		    				<li><span>证件号码</span><div><input name="certId" type="text"></div></li>
+		    				<div class="hide"><input id="proofUrlPath" name="proofUrl" type="text"></div</li>
+		    			</ul>
+		    		</form>
+		    		<form id="uploadProofForm">
+		    			<ul class="form ratio80">
+		    			    <li><span>证件照片</span><div><input id="uploadProof" name="file" type="file"></div>
+		    			    </li>
+		    			</ul>
+		    		</form>
+		    		
+		    		<div class="btn-group fr">
+		    				<button class="btn" onclick="uploadProofFunc()"><i class="flaticon-picture28"></i>上传图片</button>
+		    			    <button class="btn bg-main3" onclick="submitApply()"><i class="flaticon-clipboard85"></i>提交</button>
+		    		</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    
+    #parse("sub-footer.vm")
+    
+</div>
+<!-- wrapper end -->
+
+<script src="/js/jquery.js"></script>
+<script src="/js/diquick.js"></script>
+<script src="/js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.form.js"></script>
+<script src="/js/joshua.js"></script>
+
+</body>
+
+</html>

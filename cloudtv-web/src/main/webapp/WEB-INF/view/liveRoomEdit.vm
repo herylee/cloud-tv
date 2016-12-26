@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>云游戏直播平台</title>
+    <meta name="keywords" content="Keywords">
+    <meta name="description" content="Description">
+
+    <link rel="stylesheet" href="/css/diquick.css">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="/css/joshua.css">
+    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css">
+    <link rel="stylesheet" href="/css/wangEditor.min.css">
+
+</head>
+
+<body>
+
+<!-- wrapper begin -->
+<div class="wrapper">
+    <div class="header">
+		#parse("sub-nav.vm")
+        <div class="banner">
+            <div class="shell">
+                <dl>
+					<img src=${myself.headUrl} onerror="this.src='/img/defaultHead.gif'" class="circle mb3" style="max-width: 130px; border: solid gainsboro;" />
+
+                    <div class="fs5 c-fff">
+                    	${myself.nickname}
+                    	#if(${myself.sex} == 1)
+                            <span class="badge bg-blue">男</span>
+                        #else
+                            <span class="badge bg-red">女</span>
+                        #end
+                    </div>
+					#if(${myself.selfSignature})
+					#end
+                    <div class="fs2 c-fff mt5">简介：
+						#if(${myself.selfSignature})
+							${myself.selfSignature}
+						#else
+                             这个人很懒，什么都没留下。
+						#end
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="main mt5">
+        <div class="shell" style="max-width: 60rem">
+			<div id="roomMeta">
+                <h1 id="roomName" class="fc">$!{liveRoom.roomName}</h1>
+                <div id="roomDescription">$!{liveRoom.roomDescription}</div>
+                <button type="button" class="btn" onclick="editRoomMeta()">编辑</button>
+			</div>
+
+        	<form id="roomMetaForm" class="hide">
+			    <ul class="form ratio100">
+			        <li><span>房间名</span><div><input name="roomName" id="roomNameEdit" type="text"></div></li>
+			        <li><span>游戏类型</span>
+			            <div>
+			                <select name="publishType">
+			                    <option value="1">单机游戏</option>
+			                    <option value="2">网络游戏</option>
+			                    <option value="3">百变主播</option>
+			                    <option value="4">科学教育</option>
+			                    <option value="5">经典轮播</option>
+			                    <option value="6">户外直播</option>
+			                    <option value="7">其他</option>
+			                </select>
+			            </div>
+			        </li>
+			        <input id="roomDescriptionEdit" name="roomDescription" type="hidden">
+			        <li><span>房间描述</span>
+			        	<div style="">
+			        		<textarea id="textarea1"></textarea>
+			        	</div>
+			        </li>
+			        <li><button type="button" class="btn bg-main3" onclick="submitRoomMeta()">提交</button></li>
+			    </ul>
+			</form>
+        	
+        	
+
+        </div>
+    </div>
+
+	#include("sub-footer.vm")
+</div>
+<!-- wrapper end -->
+
+<script src="/js/jquery.js"></script>
+<script src="/js/diquick.js"></script>
+<script src="/js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.form.js"></script>
+<script src="/js/wangEditor.min.js"></script>
+<script src="/js/joshua.js"></script>
+
+</body>
+
+</html>

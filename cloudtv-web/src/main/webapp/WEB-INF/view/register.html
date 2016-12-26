@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>云游戏直播平台</title>
+<meta name="keywords" content="Keywords">
+<meta name="description" content="Description"> 
+
+<link rel="stylesheet" href="css/diquick.css">
+<link rel="stylesheet" href="css/jquery-ui.min.css">
+<link rel="stylesheet" href="css/joshua.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css">
+
+</head>
+
+<body>
+
+<!-- wrapper begin -->
+<div class="wrapper">
+    <div class="header">
+    	<div class="navbar">
+    		<div class="shell">
+    			<div class="menu base">
+    				<div><a href="/">首页</a></div>
+    				<div><a href="/">全部</a></div>
+    				<div><a href="/">分类</a></div>
+    				<div><a href="/">更多</a></div>
+
+					<div class="fr" ><a id="loginButton" href="#login-box">登录</a></div>
+                    <!-- 登录box -->
+                    <div id="login-box" class="hide">
+                    	<h5 class="tc">Cloud.tv</h5>
+                    	<form id="loginForm">
+                    		<ul class="form ratio100">
+                    			<li><span>E-mail</span><div><input name="email" type="text"></div></li>
+                                <li><span>Password</span><div><input name="password" type="text"></div></li>
+                                <li><div class="tc"><button onclick="login()" type="button" class="btn">登录</button></div></li>
+                    		</ul>
+                    	</form>
+                    </div>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="banner">
+    		<div class="shell">
+    			<dl>
+    				<dt>Cloud.tv</dt>
+    				<dd><i class="flaticon-analogic4"></i>一个简易的云游戏直播平台</dd>
+    				<dd>alpha 0.1</dd>
+    			</dl>
+    		</div>
+    	</div>
+    </div>
+    
+    <div class="main">
+    	<div class="shell">
+    		<div class="box100">
+    			<div class="box20">&nbsp;</div>
+    			<div class="box60">
+    				<div id="registerResult-correct" class="msg correct hide"><i class="flaticon-verification16"></i>注册成功！请到登录界面登录。</div>
+                    <div id="registerResult-error" class="msg error hide"><i class="flaticon-prohibition18"></i><div id="registerResult-error-message" style="display: inline;"></div></div>
+		    		<h2 class="mb5">注册</h2>
+		    		<form id="registerFrom">
+		    			<ul class="form ratio80">
+		    				<li><span>邮箱</span><div><input name="email" type="text"></div></li>
+		    				<li><span>密码</span><div><input name="password" type="text"></div></li>
+		    				<li><span>用户名</span><div><input name="nickname" type="text"></div></li>
+		    				<li><span>性别</span>
+				                <select name="sex">
+				                    <option value="1">男</option>
+				                    <option value="0">女</option>
+				                </select>
+		    				</li>
+		    				<li><span>出生年月</span><div><input name="bornTime" type="text" id="datepicker"></div></li>
+		    				
+		    			</ul>
+		    		</form>
+		    		<div class="tc"><button class="btn" onclick="submitRegister()">提交</button></div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    
+    <div class="footer">
+    	<div class="shell">
+    		<div class="box75 fc">
+    			<div class="box25">
+    				<dl class="baselist">
+    					<dt>友情链接</dt>
+    					<dd>Twitch</dd>
+    					<dd>斗鱼</dd>
+    					<dd>熊猫直播</dd>
+    					<dd>战旗</dd>
+    					<dd></dd>
+    				</dl>
+    			</div>
+    			<div class="box25">
+    				<dl class="baselist">
+    					<dt>联系我们</dt>
+    					<dd>Weibo</dd>
+    					<dd>知乎</dd>
+    				</dl>
+    			</div>
+    			<div class="box25">
+    				<dl class="baselist">
+    					<dt>帮助</dt>
+    					<dd>新手上路</dd>
+    					<dd>工具教程</dd>
+    				</dl>
+    			</div>
+    			<div class="box25">
+    				<dl class="baselist">
+    					<dt>相关技术</dt>
+    					<dd>Gaming Anywhere</dd>
+    					<dd>Nginx</dd>
+    					<dd>video.js</dd>
+    					<dd>Spring boot</dd>
+    				</dl>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="bg-333 c-999">
+    		<div class="shell pt5 pb5">
+    			<div style="text-align: center;">Copyright ©2016 Networking Research Lab @ SYSU - All Rights Reserved</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+<!-- wrapper end -->
+
+<script src="js/jquery.js"></script>
+<script src="js/diquick.js"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/joshua.js"></script>
+<script>
+
+// 提交注册表单
+function submitRegister() {
+	$.ajax({
+		type: 'post',
+		url: 'auth/register',
+		dataType:'json',
+		data: $('#registerFrom').serialize(),
+		success: function(data) {
+			if(data.retCode==200) {
+				$('#registerResult-error').addClass('hide');
+				$('#registerResult-correct').removeClass('hide');
+			} else {
+				var message = data.message;
+				$('#registerResult-correct').addClass('hide');
+				$('#registerResult-error-message').text(data.message);
+				$('#registerResult-error').removeClass('hide').addClass('show');
+			}
+		}
+	});
+};
+
+</script>
+
+</body>
+
+</html>

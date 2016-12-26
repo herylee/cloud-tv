@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="joshua.cloudtv.dao.mapper.RtmpServerInfoMapper">
+  <resultMap id="BaseResultMap" type="joshua.cloudtv.dao.model.RtmpServerInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="hostname" jdbcType="VARCHAR" property="hostname" />
+    <result column="ip" jdbcType="INTEGER" property="ip" />
+    <result column="cluster_url" jdbcType="VARCHAR" property="clusterUrl" />
+    <result column="parent_cluster_url" jdbcType="VARCHAR" property="parentClusterUrl" />
+    <result column="connection_count" jdbcType="INTEGER" property="connectionCount" />
+    <result column="max_connection_number" jdbcType="INTEGER" property="maxConnectionNumber" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hostname, ip, cluster_url, parent_cluster_url, connection_count, max_connection_number, 
+    start_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rtmp_server_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rtmp_server_info
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rtmp_server_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="joshua.cloudtv.dao.model.RtmpServerInfo">
+    insert into rtmp_server_info (id, hostname, ip, 
+      cluster_url, parent_cluster_url, connection_count, 
+      max_connection_number, start_time)
+    values (#{id,jdbcType=INTEGER}, #{hostname,jdbcType=VARCHAR}, #{ip,jdbcType=INTEGER}, 
+      #{clusterUrl,jdbcType=VARCHAR}, #{parentClusterUrl,jdbcType=VARCHAR}, #{connectionCount,jdbcType=INTEGER}, 
+      #{maxConnectionNumber,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="joshua.cloudtv.dao.model.RtmpServerInfo">
+    insert into rtmp_server_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hostname != null">
+        hostname,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="clusterUrl != null">
+        cluster_url,
+      </if>
+      <if test="parentClusterUrl != null">
+        parent_cluster_url,
+      </if>
+      <if test="connectionCount != null">
+        connection_count,
+      </if>
+      <if test="maxConnectionNumber != null">
+        max_connection_number,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hostname != null">
+        #{hostname,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=INTEGER},
+      </if>
+      <if test="clusterUrl != null">
+        #{clusterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentClusterUrl != null">
+        #{parentClusterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="connectionCount != null">
+        #{connectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxConnectionNumber != null">
+        #{maxConnectionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="joshua.cloudtv.dao.model.RtmpServerInfo">
+    update rtmp_server_info
+    <set>
+      <if test="hostname != null">
+        hostname = #{hostname,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=INTEGER},
+      </if>
+      <if test="clusterUrl != null">
+        cluster_url = #{clusterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentClusterUrl != null">
+        parent_cluster_url = #{parentClusterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="connectionCount != null">
+        connection_count = #{connectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxConnectionNumber != null">
+        max_connection_number = #{maxConnectionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="joshua.cloudtv.dao.model.RtmpServerInfo">
+    update rtmp_server_info
+    set hostname = #{hostname,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=INTEGER},
+      cluster_url = #{clusterUrl,jdbcType=VARCHAR},
+      parent_cluster_url = #{parentClusterUrl,jdbcType=VARCHAR},
+      connection_count = #{connectionCount,jdbcType=INTEGER},
+      max_connection_number = #{maxConnectionNumber,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

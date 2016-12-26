@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="joshua.cloudtv.dao.mapper.LiveRoomMapper">
+  <resultMap id="BaseResultMap" type="joshua.cloudtv.dao.model.LiveRoom">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="publisher_id" jdbcType="INTEGER" property="publisherId" />
+    <result column="room_name" jdbcType="VARCHAR" property="roomName" />
+    <result column="poster_url" jdbcType="VARCHAR" property="posterUrl" />
+    <result column="publish_url" jdbcType="VARCHAR" property="publishUrl" />
+    <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
+    <result column="last_publish_time" jdbcType="TIMESTAMP" property="lastPublishTime" />
+    <result column="publish_type" jdbcType="INTEGER" property="publishType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="joshua.cloudtv.dao.model.LiveRoom">
+    <result column="room_description" jdbcType="LONGVARCHAR" property="roomDescription" />
+  </resultMap>
+
+  <!-- 关联 -->
+  <resultMap extends="ResultMapWithBLOBs" type="joshua.cloudtv.dao.model.LiveRoom" id="AssociationResultMap">
+    <association property="user" javaType="joshua.cloudtv.dao.model.User">
+      <id column="user_id" jdbcType="INTEGER" property="id" />
+      <result column="email" jdbcType="VARCHAR" property="email" />
+      <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+      <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+      <result column="password" jdbcType="VARCHAR" property="password" />
+      <result column="salt" jdbcType="BIGINT" property="salt" />
+      <result column="head_url" jdbcType="VARCHAR" property="headUrl" />
+      <result column="level" jdbcType="INTEGER" property="level" />
+      <result column="experience" jdbcType="INTEGER" property="experience" />
+      <result column="permission" jdbcType="INTEGER" property="permission" />
+      <result column="last_login_ip" jdbcType="INTEGER" property="lastLoginIp" />
+      <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+      <result column="self_signature" jdbcType="VARCHAR" property="selfSignature" />
+      <result column="sex" jdbcType="TINYINT" property="sex" />
+      <result column="born_time" jdbcType="DATE" property="bornTime" />
+      <result column="province" jdbcType="VARCHAR" property="province" />
+      <result column="city" jdbcType="VARCHAR" property="city" />
+      <result column="area" jdbcType="VARCHAR" property="area" />
+      <result column="occupation" jdbcType="VARCHAR" property="occupation" />
+    </association>
+  </resultMap>
+  <select id="getLiveRoomsSelective"  parameterType="java.lang.Integer" resultMap="AssociationResultMap">
+    SELECT l.id as id, email, phone_number, nickname, password, salt, head_url, level, experience, permission,
+    last_login_ip, last_login_time, self_signature, sex, born_time, province, city, area,
+    occupation, u.id as user_id, publisher_id, room_name, poster_url, publish_url, access_token,
+    last_publish_time, publish_type
+    FROM live_room as l INNER JOIN `user` as u ON l.publisher_id = u.id
+    where access_token is not null
+    <if test="publisherType != null">
+      and publish_type = #{publisherType,jdbcType=INTEGER}
+    </if>
+    limit #{startIndex,jdbcType=INTEGER}, #{endIndex,jdbcType=INTEGER}
+  </select>
+  <!-- 关联 -->
+
+  <sql id="Base_Column_List">
+    id, publisher_id, room_name, poster_url, publish_url, access_token, last_publish_time, 
+    publish_type
+  </sql>
+  <sql id="Blob_Column_List">
+    room_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from live_room
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from live_room
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelectiveAndGetId" useGeneratedKeys="true" keyProperty="id" parameterType="joshua.cloudtv.dao.model.LiveRoom">
+    insert into live_room
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="publisherId != null">
+        publisher_id,
+      </if>
+      <if test="roomName != null">
+        room_name,
+      </if>
+      <if test="posterUrl != null">
+        poster_url,
+      </if>
+      <if test="publishUrl != null">
+        publish_url,
+      </if>
+      <if test="accessToken != null">
+        access_token,
+      </if>
+      <if test="lastPublishTime != null">
+        last_publish_time,
+      </if>
+      <if test="publishType != null">
+        publish_type,
+      </if>
+      <if test="roomDescription != null">
+        room_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="publisherId != null">
+        #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="roomName != null">
+        #{roomName,jdbcType=VARCHAR},
+      </if>
+      <if test="posterUrl != null">
+        #{posterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishUrl != null">
+        #{publishUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null">
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPublishTime != null">
+        #{lastPublishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishType != null">
+        #{publishType,jdbcType=INTEGER},
+      </if>
+      <if test="roomDescription != null">
+        #{roomDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="joshua.cloudtv.dao.model.LiveRoom">
+    update live_room
+    <set>
+      <if test="publisherId != null">
+        publisher_id = #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="roomName != null">
+        room_name = #{roomName,jdbcType=VARCHAR},
+      </if>
+      <if test="posterUrl != null">
+        poster_url = #{posterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishUrl != null">
+        publish_url = #{publishUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null">
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPublishTime != null">
+        last_publish_time = #{lastPublishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishType != null">
+        publish_type = #{publishType,jdbcType=INTEGER},
+      </if>
+      <if test="roomDescription != null">
+        room_description = #{roomDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="joshua.cloudtv.dao.model.LiveRoom">
+    update live_room
+    set publisher_id = #{publisherId,jdbcType=INTEGER},
+      room_name = #{roomName,jdbcType=VARCHAR},
+      poster_url = #{posterUrl,jdbcType=VARCHAR},
+      publish_url = #{publishUrl,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      last_publish_time = #{lastPublishTime,jdbcType=TIMESTAMP},
+      publish_type = #{publishType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
