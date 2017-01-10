@@ -25,4 +25,8 @@ public enum UserPermission {
     public static boolean isPublisher(int permission) {
         return (PUBLISHER.getPermission() & permission) >> 1 == 1;
     }
+
+    public static boolean isAdmin(int permission) {
+        return ((PUBLISHER.getPermission() & permission) >> 2 == 1) || (PUBLISHER.getPermission() & permission) >> 3 == 1;
+    }
 }

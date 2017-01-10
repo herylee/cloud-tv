@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>云游戏直播平台-后台管理</title>
+    <meta name="keywords" content="Keywords">
+    <meta name="description" content="Description">
+
+    <link rel="stylesheet" href="/css/diquick.css">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="/css/joshua.css">
+    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css">
+
+</head>
+
+<style>
+
+    body {background-color:#f1f4f5;color:#333;}
+    a,form {color:#333;}
+    a:hover {color:#3f51b5;}
+
+    .container {padding:2rem .75rem 0;width:100%;}
+
+    @media screen and (min-width:750px) {.dialog {max-width:650px;min-width:450px;}}
+    @media screen and (min-width:1200px) {.dialog {max-width:800px;min-width:600px;}}
+
+    /*--button--*/
+    .btn {background-color:#3f51b5;color:#fff;}
+    .btn:hover {color:#fff;}
+
+    /*--panel--*/
+    .panel {border:0;border-radius:.375rem;}
+    .panel>.title {background-color:#fff;color:#333;}
+    .panel>.content {border-top:1px solid #f1f2f4;}
+    .panel>.action {color:#333;}
+
+    /*--page--*/
+    ul.page li a {background-color:#f1f2f4;color:#333;}
+    ul.page li a:hover,
+    ul.page li.active a {background-color:#3f51b5;color:#fff;}
+
+    /**--dropmenu--**/
+    .dropmenu>span {color:#333;font-size:1rem;}
+    .dropmenu ul {border-radius:.25rem;background-color:#222;}
+    .dropmenu ul li a {padding-top:.375rem;padding-bottom:.375rem;color:#ccc;font-size:.925rem;}
+    .dropmenu ul li a:hover,
+    .dropmenu ul li.active a {background-color:#3f51b5;color:#fff;}
+
+    /*--table--*/
+    .table thead tr {border-bottom:2px solid #ccc;background-color:#f1f2f4;color:#333;}
+    .table thead tr th label {color:#333;}
+
+    /**--top-nav--**/
+    .top-nav {padding:1rem 2rem;background-color:#fff;box-shadow:0 0px 8px 0 rgba(0,0,0,0.06),0 1px 0px 0 rgba(0,0,0,0.02);}
+    .top-nav .toggle-nav-btn {margin-top:.25rem;color:#999;font-size:1.5rem;cursor:pointer;}
+    .top-nav .toggle-nav-btn:hover {color:#666;}
+    .top-nav .dropmenu {margin:0;}
+    .top-nav .dropmenu>span {font-weight:normal;}
+    .top-nav:after {clear:both;display:table;content:"";line-height:0;}
+
+    @media screen and (max-width:750px) {
+        .top-nav {width:100%;}
+    }
+
+    /**--toggle-nav--**/
+    .toggle-nav {background-color:#222;color:#fff;box-shadow:3px 0 5px rgba(0, 0, 0, 0.15);}
+
+    .toggle-nav .menu.accordion>div {border-bottom:0;}
+    .toggle-nav .menu.accordion>div:last-of-type {border-bottom:0;}
+    .toggle-nav .menu.accordion>div>a {padding:.75rem 1rem;color:#ccc;font-size:1.125rem;}
+    .toggle-nav .menu.accordion>div>a>i.arrow {background-position:-1px -28px;}
+
+    .toggle-nav .menu.accordion>div>ul {background-color:#191919;}
+    .toggle-nav .menu.accordion>div>ul>li>a {padding:.25rem 1rem;color:#ccc;font-size:.925rem;}
+    .toggle-nav .menu.accordion>div>ul>li:hover>a,
+    .toggle-nav .menu.accordion>div>ul>li.active>a {background-color:transparent;color:#fff;}
+
+    .toggle-nav .menu.accordion>div:hover>a,
+    .toggle-nav .menu.accordion>div.active>a {background-color:#191919;color:#fff;}
+
+    .toggle-content.active {width:calc(100% - 20rem);}
+
+    @media screen and (max-width:750px) {
+        .toggle-nav {width:17.5rem;}
+        .toggle-content.active {left:17.5rem;width:100%;}
+    }
+
+</style>
+
+<body>
+
+<!-- wrapper begin -->
+<div class="wrapper">
+
+    <!-- main begin -->
+    <div class="main">
+
+        <!-- top-nav begin -->
+        <div class="top-nav">
+            <i data-click="togglenavigation" class="toggle-nav-btn flaticon-four92"></i>
+            <div class="ib fr">
+                <a href="#" class="btn xs">Cloud.tv主页</a>
+            </div>
+        </div>
+        <!-- top-nav end -->
+
+        <!-- container begin -->
+        <div class="container">
+
+            <!-- panel begin -->
+            <div class="box100 plr">
+                <div class="panel">
+                    <div class="title">验证主播</div>
+                    <div class="content">
+
+                        <form class="box-s100 ib fr">
+                            <ul class="form">
+                                <li><span>Search:</span><div><input name="search" type="text"></div></li>
+                                <li><button type="submit" class="btn xs">Search</button></li>
+                            </ul>
+                        </form>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>真实姓名</th>
+                                <th>证件号</th>
+                                <th>证件图片</th>
+                                <th>电话</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            #macro( showCadidatePublishers $cadidatePublishers )
+                            #foreach($publisher in $cadidatePublishers )
+
+                            <tr>
+                                <td>${publisher.id}</td>
+                                <td>${publisher.realname}</td>
+                                <td>${publisher.certId}</td>
+                                <td><a id="proof-box-btn" href="${publisher.proofUrl}" class="btn" target="_blank">点击查看</a></td>
+                                <td>${publisher.phoneNumber}</td>
+                                <td><button class="btn xs bg-main3" onclick="">通过</button><button class="btn xs bg-red">不通过</button></td>
+                            </tr>
+                            #end
+                            #end
+
+                            #showCadidatePublishers($cadidatePublishers)
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- panel end -->
+
+            <div class="box100 plr">
+                <div class="panel">
+                    <div class="title">直播</div>
+                    <div class="content">
+                        <!-- slider begin -->
+                        <ul class="box-advance list4 list-m2 list-s1 plr">
+                            #macro( showDropLiveRooms $liveRoomsList )
+                            #foreach($liveRoomView in $liveRoomsList )
+
+                            <li>
+                                <div class="media zoom">
+                                    <span><a href="/liveRoom/$liveRoomView.roomId"><img src="${liveRoomView.posterUrl}"  onerror="this.src='/img/defaultPoster.jpg'"></a></span>
+                                    <dl>
+                                        <dt>$liveRoomView.roomName</dt>
+                                        <dd>$liveRoomView.publisherNickName</dd>
+                                        <dd><button type="button" class="btn xs bg-333" onclick="stopStream('${liveRoomView.dropStreamUrl}')">停止直播</button></dd>
+                                    </dl>
+                                </div>
+                            </li>
+
+                            #end
+                            #end
+
+                            #showDropLiveRooms($liveRoomslist)
+
+                        </ul>
+                        <!-- slider end -->
+                    </div>
+                </div>
+            </div>
+            <!-- panel end -->
+
+
+        </div>
+        <!-- container end -->
+
+    </div>
+    <!-- main end -->
+
+    <!-- toggle-nav begin -->
+    <div id="togglenavigation" class="toggle-nav relative active">
+        <div class="media tc">
+            <span class="box30 fc"><img src="${myself.headUrl}" class="radius"></span>
+            <dl>
+                <dt>Admin</dt>
+                <dd>Good morning!</dd>
+                <dd><a href="#" class="btn xs">登出</a></dd>
+            </dl>
+        </div>
+        <div class="menu accordion">
+            <div><a href="#"><i class="flaticon-gear31"></i>管理主页</a></div>
+            <div class="active"><a href="#"><i class="flaticon-text130"></i>主播模块</a>
+                <ul>
+                    <li class="active"><a href="#">认证主播</a></li>
+                    <li><a href="#">修改主播状态</a></li>
+                </ul>
+            </div>
+            <div><a href="#"><i class="flaticon-menu48"></i>直播模块</a>
+                <ul>
+                    <li><a href="#">管理直播房间</a></li>
+                    <li><a href="#">取消禁播</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- toggle-nav end -->
+
+</div>
+<!-- wrapper end -->
+
+<script src="/js/jquery.js"></script>
+<script src="/js/diquick.js"></script>
+<script src="/js/admin.js"></script>
+<script src="/js/fancybox/jquery.fancybox.pack.js"></script>
+
+
+</body>
+
+</html>
